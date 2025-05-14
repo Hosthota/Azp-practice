@@ -1,17 +1,13 @@
 package POJO;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Post_Response_InnerObject {
+public class GetResponseBody {
+
     String creationTime;
     String endTime;
     String entryName;
-
-    Post_Response_InnerObject(){
-
-    }
 }
