@@ -25,11 +25,13 @@
         "creationTime",
         "endTime",
         "entryName"
-      ]
+      ],
+      "additionalProperties": false
     }
   },
   "required": [
     "id",
     "innerObject"
-  ]
+  ],
+  "additionalProperties": false
 }

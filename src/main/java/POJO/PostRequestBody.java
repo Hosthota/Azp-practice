@@ -8,10 +8,6 @@ import lombok.Setter;
 public class PostRequestBody {
     private String entryName;
 
-    public PostRequestBody(){
-
-    }
-
     public PostRequestBody(String entryName) {
         this.entryName = entryName;
     }

@@ -13,14 +13,14 @@ import utils.JsonSchemaCompare;
 public class PositiveResponseVerificationOnPatch extends BaseTest {
 
 
-    public PositiveResponseVerificationOnPatch() throws Exception {}
+    public PositiveResponseVerificationOnPatch(){}
 
     PatchAPI patchAPI = new PatchAPI();
     JsonSchemaCompare jsonSchemaCompare = new JsonSchemaCompare();
     SoftAssert softAssert;
 
-    @Test
-    public void verifyPositiveResponseWithValidDetailsByUpdatingEntryName() throws  Exception{
+    @Test(description = "Verify the response by passing all the valid data by entering the patchFiledValue as entryname")
+    public void verifyPositiveResponseWithValidDetailsByUpdatingEntryName(){
         PatchRequestBody patchRequestBody = new PatchRequestBody("entryName", "new_Allianz_5899");
         Response response = patchAPI.patchAPIValidations(id,bearerToken,patchRequestBody,contentType);
         softAssert = new SoftAssert();
@@ -35,8 +35,8 @@ public class PositiveResponseVerificationOnPatch extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test
-    public void verifyPositiveResponseWithValidDetailsByUpdatingEndTime() throws Exception {
+    @Test(description = "Verify response by passing all the valid data by passing patchFiledName as endTime")
+    public void verifyPositiveResponseWithValidDetailsByUpdatingEndTime(){
         PatchRequestBody patchRequestBody = new PatchRequestBody("endTime", "2025-05-19");
         Response response = patchAPI.patchAPIValidations(id,bearerToken,patchRequestBody,contentType);
         softAssert = new SoftAssert();

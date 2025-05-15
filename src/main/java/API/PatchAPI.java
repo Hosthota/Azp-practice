@@ -4,6 +4,8 @@ package API;
 import POJO.PatchRequestBody;
 import POJO.PatchResponseBody;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
 import org.testng.asserts.SoftAssert;
 
 import static io.restassured.RestAssured.given;
@@ -29,27 +31,18 @@ public class PatchAPI {
 
     private <T> Response patchAPI(String id, String auth, T patchRequestBody, String contentType){
 
-        if(patchRequestBody == null){
-            return given()
-                    .header("Authorization", auth)
-                    .contentType(contentType)
-                    .pathParam("id", id)
-                    .log().all()
-                    .patch("/object/patch/{id}")
-                    .then()
-                    .extract().response();
-        }else {
-            return given()
-                    .header("Authorization", auth)
-                    .contentType(contentType)
-                    .pathParam("id", id)
-                    .body(patchRequestBody)
-                    .log().all()
-                    .patch("/object/patch/{id}")
-                    .then()
-                    .log().all()
-                    .extract().response();
+        RequestSpecification requestSpecification = given()
+                .header("Authorization", auth)
+                .contentType(contentType)
+                .pathParam("id", id);
+
+        if(patchRequestBody != null) {
+            requestSpecification.body(patchRequestBody);
         }
+            return requestSpecification
+                    .patch("/object/patch/{id}")
+                    .then()
+                    .extract().response();
     }
 
     public Response patchAPIValidations(String id, String auth, PatchRequestBody patchRequestBody, String contentType){

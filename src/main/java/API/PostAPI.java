@@ -3,6 +3,7 @@ package API;
 import POJO.PostRequestBody;
 import POJO.PostResponseBody;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 
 import java.time.LocalDate;
@@ -35,27 +36,18 @@ public class PostAPI {
 
     private <T> Response postAPI(String auth, String contentType, T postRequestBody) {
 
-            if (postRequestBody == null){
-                return given()
-                        .header("Authorization", auth)
-                        .contentType(contentType)
-                        .log().all()
-                        .post("/object")
-                        .then()
-                        .log().all()
-                        .extract().response();
+        RequestSpecification specification = given()
+                .header("Authorization", auth)
+                .contentType(contentType);
 
-            }else{
-                return given()
-                        .header("Authorization", auth)
-                        .contentType(contentType)
-                        .body(postRequestBody)
-                        .log().all()
-                        .post("/object")
-                        .then()
-                        .log().all()
-                        .extract().response();
-            }
+        if (postRequestBody != null) {
+            specification.body(postRequestBody);
+
+        }
+        return specification
+                .post("/object")
+                .then()
+                .extract().response();
     }
 
     public <T> Response postAPIValidations(String auth, String contentType, T postRequestBody){
@@ -66,7 +58,7 @@ public class PostAPI {
             return postAPI(auth, contentType,null);
     }
 
-    //invalid contentType
+
     public Response postAPIValidations(String auth, PostRequestBody postRequestBody){
             return postAPI(auth,"application/xml",postRequestBody.getEntryName());
     }

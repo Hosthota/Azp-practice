@@ -10,15 +10,15 @@ import org.testng.asserts.SoftAssert;
 import utils.JsonSchemaCompare;
 
 public class PositiveResponseVerificationOnPost extends BaseTest {
-    public PositiveResponseVerificationOnPost() throws Exception {
-    }
+
+    public PositiveResponseVerificationOnPost(){}
 
     PostAPI postApi = new PostAPI();
     JsonSchemaCompare jsonSchemaCompare = new JsonSchemaCompare();
 
 
-    @Test
-    public void verifyPositiveResponseWithValidDetails() throws Exception {
+    @Test(description = "Verify response by passing valid details")
+    public void verifyPositiveResponseWithValidDetails(){
         PostRequestBody postRequestBody = new PostRequestBody("Allianz_a131");
         Response response =  postApi.postAPIValidations(bearerToken,contentType,postRequestBody);
 
@@ -32,6 +32,5 @@ public class PositiveResponseVerificationOnPost extends BaseTest {
         postApi.verifyRequestBody(postResponseBody, postRequestBody);
 
         softAssert.assertAll();
-
     }
 }

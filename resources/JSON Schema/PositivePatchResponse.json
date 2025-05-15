@@ -18,5 +18,6 @@
     "creationTime",
     "endTime",
     "entryName"
-  ]
+  ],
+  "additionalProperties": false
 }

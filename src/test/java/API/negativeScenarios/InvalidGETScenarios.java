@@ -9,15 +9,18 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 
+
 public class InvalidGETScenarios extends BaseTest {
-    public InvalidGETScenarios() throws Exception {
+    public InvalidGETScenarios()  {
+        super();
     }
 
     JsonPath responseJson;
     GetAPI getAPI = new GetAPI();
     SoftAssert softAssert;
 
-    @Test(dataProvider ="InvalidId")
+
+    @Test(dataProvider ="InvalidId", description = "Passing invalid and null values for query parameter")
     public void verifyIdNegativeScenario(String id){
         Response response = getAPI.getAPIValidations(id, bearerToken);
         softAssert = new SoftAssert();
@@ -40,13 +43,14 @@ public class InvalidGETScenarios extends BaseTest {
     }
 
 
-@Test(dataProvider = "InvalidAuth")
+@Test(dataProvider = "InvalidAuth", description = "Passing invalid and no authorization key")
     public void verifyAuthNegativeScenario(String auth){
         Response response = getAPI.getAPIValidations(id, auth);
     softAssert = new SoftAssert();
     softAssert.assertEquals(response.statusCode(), 401,
                 "Expected 401 status code with invalid auth, but received "+response.statusCode());
-        responseJson = new JsonPath(response.asString());
+
+    responseJson = new JsonPath(response.asString());
     softAssert.assertEquals(responseJson.getString("errorMessage"), "Invalid or missing header.",
                 "Expected error message is 'Invalid or missing header.' but received "+ responseJson.get("errorMessage"));
     softAssert.assertAll();
@@ -61,7 +65,7 @@ public class InvalidGETScenarios extends BaseTest {
     }
 
 
-    @Test
+    @Test(description = "Not passing Query parameter")
     public void verifyWithoutPassingQueryParam(){
         Response response = getAPI.getAPIValidations(bearerToken);
         softAssert = new SoftAssert();

@@ -5,12 +5,9 @@ import API.PatchAPI;
 import POJO.PatchRequestBody;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-import static io.restassured.RestAssured.given;
 
 public class InvalidPatchScenarios extends BaseTest {
     public InvalidPatchScenarios() throws Exception {
@@ -20,7 +17,7 @@ public class InvalidPatchScenarios extends BaseTest {
     SoftAssert softAssert;
     Response response;
 
-    @Test
+    @Test(description = "Passing Invalid 'PatchFieldName' value in the request body")
     public void verifyResponseByPassingInvalidPatchFieldNameValue() {
         PatchRequestBody patchRequestBody = new PatchRequestBody("entryName1", "new_Allianz_5998");
         response =patchAPI.patchAPIValidations(id,bearerToken,patchRequestBody,contentType);
@@ -33,7 +30,7 @@ public class InvalidPatchScenarios extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(description = "Not passing the request body")
     public void verifyResponseWithNoBody(){
         response =  patchAPI.patchAPIValidations(id,bearerToken,contentType);
 
@@ -43,7 +40,7 @@ public class InvalidPatchScenarios extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(dataProvider ="invalidAuthDataProvider")
+    @Test(dataProvider ="invalidAuthDataProvider", description = "passing invalid and null values for authorization key")
     public void verifyInvalidAuth(String token){
         PatchRequestBody patchRequestBody = new PatchRequestBody("entryName", "new_Allianz_5998");
         response =patchAPI.patchAPIValidations(id,token,patchRequestBody,contentType);
@@ -62,7 +59,7 @@ public class InvalidPatchScenarios extends BaseTest {
         };
     }
 
-    @Test(dataProvider ="invalidAuthDataProvider")
+    @Test(dataProvider ="invalidAuthDataProvider", description = "passing invalid or null values for path parameter")
     public void verifyInvalidId(String id){
         PatchRequestBody patchRequestBody = new PatchRequestBody("entryName", "new_Allianz_5998");
         response =patchAPI.patchAPIValidations(id,bearerToken,patchRequestBody,contentType);
@@ -74,7 +71,7 @@ public class InvalidPatchScenarios extends BaseTest {
 
     }
 
-    @Test
+    @Test(description = "Not passing body and verifying the PATCH api ")
     public void verifyResponseByNotPassingBody() {
         response =patchAPI.patchAPIValidations(id,bearerToken,contentType);
 
@@ -85,14 +82,14 @@ public class InvalidPatchScenarios extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(description = "Not passing valid content type")
     public void verifyResponseByInvalidContentType(){
         PatchRequestBody patchRequestBody = new PatchRequestBody("entryName", "new_Allianz_5998");
         response =patchAPI.patchAPIValidations(id,bearerToken,patchRequestBody);
 
         softAssert=new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 415,
-                "Exxpected 415 status code but received "+response.getStatusCode());
+                "Expected 415 status code but received "+response.getStatusCode());
         softAssert.assertAll();
     }
 }

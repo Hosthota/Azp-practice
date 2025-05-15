@@ -14,7 +14,7 @@ public class InvalidPostScenario extends BaseTest {
     PostAPI postApi = new PostAPI();
     SoftAssert softAssert ;
 
-    @Test
+    @Test(description = "Updating Existing 'entryName' value and verifying the status code")
     public void verifyResponseWhenEntryNameIsRepeated() {
         PostRequestBody postRequestBody = new PostRequestBody("Allianz_B142");
         Response response  = postApi.postAPIValidations(bearerToken,"application/json",postRequestBody);
@@ -33,7 +33,7 @@ public class InvalidPostScenario extends BaseTest {
         softAssert.assertAll();
     }
 
-   @Test(dataProvider = "InvalidAuth")
+   @Test(dataProvider = "InvalidAuth", description = "Passing in valid and null values for authorization key")
     public void verifyInvalidAuth(String auth){
         PostRequestBody postRequestBody = new PostRequestBody("Allianz_B135");
         Response response  = postApi.postAPIValidations(auth,"application/json", postRequestBody);
@@ -44,7 +44,7 @@ public class InvalidPostScenario extends BaseTest {
        softAssert.assertAll();
     }
 
-    @DataProvider(name ="InvalidAuth")
+    @DataProvider(name ="InvalidAuth" )
     public Object[] invalidAuthDataProvider(){
         return new Object[]{
                 "12345",
@@ -52,7 +52,7 @@ public class InvalidPostScenario extends BaseTest {
         };
     }
 
-    @Test
+    @Test(description = "Not passing the body and verifying the response")
     public void verifyResponseWhenBodyIsNotSent() {
         Response response = postApi.postAPIValidations(bearerToken, "application/json");
 
@@ -64,7 +64,7 @@ public class InvalidPostScenario extends BaseTest {
 
     }
 
-    @Test
+    @Test(description = "Passing invalid content type and verifying the response")
     public void verifyResponseWhenInvalidContentTypeIsSent() {
         PostRequestBody postRequestBody = new PostRequestBody("Allianz_B135");
         Response response = postApi.postAPIValidations(bearerToken , postRequestBody);

@@ -8,8 +8,13 @@ import java.io.FileInputStream;
 
 public class JsonSchemaCompare {
 
-    public void compareResponseWithJsonSchema(Response response, String fileName) throws Exception {
-        FileInputStream fis =  new FileInputStream(System.getProperty("user.dir") + "\\resources\\JSON Schema\\"+ fileName);
-        response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(fis));
+    public void compareResponseWithJsonSchema(Response response, String fileName){
+        try{
+            FileInputStream fis =  new FileInputStream(System.getProperty("user.dir") + "\\resources\\JSON Schema\\"+ fileName);
+            response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(fis));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
