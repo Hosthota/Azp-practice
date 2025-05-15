@@ -5,10 +5,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class POST_API {
+public class PostRequestBody {
     private String entryName;
 
-    public POST_API(String entryName) {
+    public PostRequestBody(){
+
+    }
+
+    public PostRequestBody(String entryName) {
         this.entryName = entryName;
     }
 }
