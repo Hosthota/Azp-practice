@@ -1,6 +1,5 @@
 package com.api.utils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 public class JSONUtils {
