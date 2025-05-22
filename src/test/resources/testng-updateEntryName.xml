@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="ViewDetails">
+
+    <test name="patchVerifications">
+        <classes>
+            <class name="com.alliance.viewEntryNameDetails.ViewEntryNameNegativeTests"/>
+            <class name="com.alliance.viewEntryNameDetails.ViewEntryNamePositiveTests"/>
+        </classes>
+    </test>
+</suite>

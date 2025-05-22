@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "creationTime": {
+      "type": "string",
+      "format": "date"
+    },
+    "endTime": {
+      "type": "string",
+      "format": "date"
+    },
+    "entryName": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "creationTime",
+    "endTime",
+    "entryName"
+  ],
+  "additionalProperties": false
+}
