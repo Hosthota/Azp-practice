@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AddEntryName">
+
+    <test name="postVerifications">
+        <classes>
+            <class name="com.alliance.addNewEntryName.AddNewEntryNameNegativeTests"/>
+            <class name="com.alliance.addNewEntryName.AddNewEntryNamePositiveTest"/>
+        </classes>
+    </test>
+</suite>
